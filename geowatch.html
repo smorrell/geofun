@@ -11,9 +11,15 @@
     <script>
         var x = document.getElementById("demo");
 
+        var options =  {
+            enableHighAccuracy: false,
+            timeout: 5000,
+            maximumAge: 0
+        };
+
         function getLocation() {
             if (navigator.geolocation) {
-                navigator.geolocation.watchPosition(showPosition);
+                navigator.geolocation.watchPosition(showPosition, error, options);
             } else {
                 x.innerHTML = "Geolocation is not supported by this browser.";
             }
@@ -28,6 +34,10 @@
                 + '<p>Speed: ' + position.coords.speed + '</p>'
                 + '<p>Heading: ' + position.coords.heading + '</p>'
                 + '<p>Timestamp: ' + position.timestamp + '</p>';
+        }
+
+        function error(error) {
+            x.innerText = error;
         }
     </script>
 
